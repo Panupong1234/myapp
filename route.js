@@ -57,8 +57,6 @@ const Route = () => {
             } else if (route.name === "Movie") {
               iconName = focused ? "ios-list-box" : "ios-movie";
             }
-
-            // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}

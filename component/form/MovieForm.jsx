@@ -1,15 +1,31 @@
 import React, { useEffect } from "react";
 import {
-  Alert,
   Dimensions,
   StyleSheet,
   KeyboardAvoidingView,
+  View,
 } from "react-native";
 import { Block, Button, Input, Text, NavBar } from "galio-framework";
 import theme from "../../assets/theme";
 import { useForm } from "react-hook-form";
 
 const { height, width } = Dimensions.get("window");
+
+const InputGHB = (props) => {
+  return (
+    <View style={styles.multipleInput}>
+      <Text style={styles.label}>{props.label}</Text>
+      <Input
+        rounded
+        placeholder={props.title}
+        autoCapitalize="none"
+        // style={{ width: width * 0.9 }}
+        onChangeText={(text) => setValue(props.title, text)}
+      />
+      {props?.errors?.title && <Text>field is required</Text>}
+    </View>
+  );
+};
 
 const FormMovie = (porps) => {
   const { onSubmit } = porps;
@@ -18,22 +34,28 @@ const FormMovie = (porps) => {
   console.log("errors ===> ", errors);
   useEffect(() => {
     register({ name: "title" }, { required: true });
+    register({ name: "description" });
   }, [register]);
 
   return (
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
       <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
         <Block flex={2} center space="between">
-          <Block flex={2}>
-            <Input
-              rounded
-              placeholder="Title"
-              autoCapitalize="none"
-              style={{ width: width * 0.9 }}
-              onChangeText={(text) => setValue("title", text)}
-            />
-          </Block>
-          <Block>{errors.title && <Text>This field is required</Text>}</Block>
+          <View style={styles.multipleContainer}>
+            <InputGHB title='Title' label={'Title'} />
+
+            <View style={styles.multipleInput}>
+              <Text style={styles.label}>Title</Text>
+              <Input
+                rounded
+                placeholder="Description"
+                autoCapitalize="none"
+                onChangeText={(text) => setValue("description", text)}
+              />
+              {errors.description && <Text>description is required</Text>}
+            </View>
+          </View>
+
           <Block flex middle>
             <Button round color="error" onPress={handleSubmit(onSubmit)}>
               Add
@@ -46,6 +68,19 @@ const FormMovie = (porps) => {
 };
 
 const styles = StyleSheet.create({
+  multipleContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width,
+  },
+  multipleInput: {
+    display: "flex",
+    flex: 1,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "900",
+  },
   container: {
     flex: 1,
     alignItems: "center",
