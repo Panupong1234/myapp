@@ -1,12 +1,16 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "./screen/HomeScreen";
-import AddMovieScreen from "./screen/AddMovie";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import theme from "./assets/theme";
+
+// import screen
+import HomeScreen from "./screen/HomeScreen";
+import RegisterScreen from "./screen/RegisterScreen";
+import SuscessScreen from "./screen/SuscessScreen";
 
 const Tab = createBottomTabNavigator();
 const SettingsStack = createStackNavigator();
@@ -27,13 +31,21 @@ const HomeStackScreen = () => {
   );
 };
 
-const MovieStackScreen = () => {
+const RegisterStackScreen = () => {
   return (
-    <SettingsStack.Navigator>
-      <SettingsStack.Screen name="Movie">
+    <SettingsStack.Navigator headerMode='none'>
+      <SettingsStack.Screen name="Register">
         {(props) => (
           <View style={styles.container}>
-            <AddMovieScreen {...props} />
+            <RegisterScreen {...props} />
+            <StatusBar style="auto" />
+          </View>
+        )}
+      </SettingsStack.Screen>
+      <SettingsStack.Screen name="Suscess">
+        {(props) => (
+          <View style={styles.container}>
+            <SuscessScreen {...props} />
             <StatusBar style="auto" />
           </View>
         )}
@@ -52,17 +64,32 @@ const Route = () => {
 
             if (route.name === "Home") {
               iconName = focused
-                ? "ios-information-circle"
-                : "ios-information-circle-outline";
-            } else if (route.name === "Movie") {
-              iconName = focused ? "ios-list-box" : "ios-movie";
+                ? `${Platform.OS === "ios" ? "ios" : "md"}-home`
+                : `${Platform.OS === "ios" ? "ios" : "md"}-home`;
+            } else if (route.name === `Register`) {
+              iconName = focused
+                ? `${Platform.OS === "ios" ? "ios" : "md"}-add-circle`
+                : `${Platform.OS === "ios" ? "ios" : "md"}-add-circle-outline`;
             }
-            return <Ionicons name={iconName} size={size} color={color} />;
+            return (
+              <Ionicons
+                name={iconName}
+                size={size}
+                color={focused ? theme.COLORS.PRIMARY : color}
+              />
+            );
+          },
+          tabBarLabel: ({ focused, color, size }) => {
+            return (
+              <Text style={focused ? styles.labelActive : styles.labelDefault}>
+                {route.name}
+              </Text>
+            );
           },
         })}
       >
         <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Movie" component={MovieStackScreen} />
+        <Tab.Screen name="Register" component={RegisterStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -75,6 +102,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  labelDefault: {
+    color: theme.COLORS.SECONDARY,
+    fontWeight: 'bold'
+  },
+  labelActive: {
+    color: theme.COLORS.PRIMARY,
+    fontWeight: 'bold'
   },
 });
 
