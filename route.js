@@ -13,8 +13,9 @@ import RegisterScreen from "./screen/RegisterScreen";
 import SuscessScreen from "./screen/SuscessScreen";
 
 const Tab = createBottomTabNavigator();
-const SettingsStack = createStackNavigator();
 const HomeStack = createStackNavigator();
+const RegisterStack = createStackNavigator();
+// const HomeStack = createStackNavigator();
 
 const HomeStackScreen = () => {
   return (
@@ -33,24 +34,24 @@ const HomeStackScreen = () => {
 
 const RegisterStackScreen = () => {
   return (
-    <SettingsStack.Navigator headerMode='none'>
-      <SettingsStack.Screen name="Register">
+    <RegisterStack.Navigator headerMode='none'>
+      <RegisterStack.Screen name="Register">
         {(props) => (
           <View style={styles.container}>
             <RegisterScreen {...props} />
             <StatusBar style="auto" />
           </View>
         )}
-      </SettingsStack.Screen>
-      <SettingsStack.Screen name="Suscess">
+      </RegisterStack.Screen>
+      <RegisterStack.Screen name="Suscess">
         {(props) => (
           <View style={styles.container}>
             <SuscessScreen {...props} />
             <StatusBar style="auto" />
           </View>
         )}
-      </SettingsStack.Screen>
-    </SettingsStack.Navigator>
+      </RegisterStack.Screen>
+    </RegisterStack.Navigator>
   );
 };
 

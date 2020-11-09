@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
-import { View, Text, ScrollView, StyleSheet, Dimensions } from "react-native";
-import { Block } from "galio-framework";
-import { Cards } from "../component/Card";
+import { View, StyleSheet, Dimensions } from "react-native";
 import theme from "../assets/theme";
 import moment from "moment";
 import RegisterForm from "../component/form/RegisterForm";
 
 const { width } = Dimensions.get("screen");
 
-const AddMovieScreen = (props) => {
-  console.log("props ====> ", JSON.stringify(props));
+const RegisterScreen = (props) => {
+  
   const handleSubmit = (data) => {
-    console.log("handleSubmit ===> ", JSON.stringify(data));
-    navigation.navigate("Suscess", data);
+    console.log("handleSubmit ===> ", data, props);
+    props.navigation.push("Suscess", data);
   };
 
   const handleCancle = () => {
-    console.log("handleCancle ===> ");
+    props.navigation.jumpTo("Home");
   };
 
   return (
@@ -36,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddMovieScreen;
+export default RegisterScreen;

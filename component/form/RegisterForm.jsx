@@ -20,7 +20,7 @@ const Form = [
       {
         name: "no",
         label: "บ้านเลขที่",
-        rules: { required: true },
+        rules: { required: "field is required!" },
       },
       {
         name: "moo",
@@ -45,11 +45,21 @@ const Form = [
     name: "village",
     label: "หมู่บ้าน",
   },
+  {
+    keyboardType: "select",
+    options: [
+      { label: "1", value: 1 },
+      { label: "2", value: 2 },
+      { label: "3", value: 3 },
+    ],
+    name: "provice",
+    label: "จังหวัด",
+  },
 ];
 
 const RegisterForm = (porps) => {
   const { onSubmit, onCancle } = porps;
-  const { register, handleSubmit, setValue, errors } = useForm();
+  const { register, handleSubmit, setValue, errors, watch } = useForm();
 
   useEffect(() => {
     Form.forEach((e) => {
@@ -69,20 +79,30 @@ const RegisterForm = (porps) => {
         <SafeAreaView style={styles.containerInput}>
           <ScrollView contentContainerStyle={styles.scrollInput}>
             <Block>
-              {Form.map((e) =>
+              {Form.map((e, i) =>
                 e?.sub ? (
-                  <View style={styles.multipleContainer}>
-                    {e.sub.map((ee) => (
+                  <View style={styles.multipleContainer} key={`input_${i}`}>
+                    {e.sub.map((ee, ii) => (
                       <InputGHB
+                        key={`sub_input_${ii}`}
                         {...ee}
-                        onChangeText={(text) => setValue(ee.name, text)}
+                        value={watch(ee.name)}
+                        onChangeText={(text) => {
+                          setValue(ee.name, text);
+                        }}
+                        errors={errors[ee.name]}
                       />
                     ))}
                   </View>
                 ) : (
                   <InputGHB
+                    key={`input_${i}`}
                     {...e}
-                    onChangeText={(text) => setValue(e.name, text)}
+                    value={watch(e.name)}
+                    onChangeText={(text) => {
+                      setValue(e.name, text);
+                    }}
+                    errors={errors[e.name]}
                   />
                 )
               )}
