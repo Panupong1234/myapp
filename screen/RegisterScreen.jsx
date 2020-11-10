@@ -9,8 +9,9 @@ const { width } = Dimensions.get("screen");
 
 const RegisterScreen = (props) => {
   
-  const handleSubmit = (data) => {
-    console.log("handleSubmit ===> ", data, props);
+  const handleSubmit = async (data) => {
+    const url = "https://galleryghb.herokuapp.com/register"
+    await axios.post(url,data)
     props.navigation.push("Suscess", data);
   };
 

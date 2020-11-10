@@ -11,11 +11,12 @@ import theme from "./assets/theme";
 import HomeScreen from "./screen/HomeScreen";
 import RegisterScreen from "./screen/RegisterScreen";
 import SuscessScreen from "./screen/SuscessScreen";
+import ListRegister from "./screen/ListRegister";
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const RegisterStack = createStackNavigator();
-// const HomeStack = createStackNavigator();
+const ListRegistorStack = createStackNavigator();
 
 const HomeStackScreen = () => {
   return (
@@ -34,7 +35,7 @@ const HomeStackScreen = () => {
 
 const RegisterStackScreen = () => {
   return (
-    <RegisterStack.Navigator headerMode='none'>
+    <RegisterStack.Navigator headerMode="none">
       <RegisterStack.Screen name="Register">
         {(props) => (
           <View style={styles.container}>
@@ -55,6 +56,21 @@ const RegisterStackScreen = () => {
   );
 };
 
+const ListRegisterStackScreen = () => {
+  return (
+    <ListRegistorStack.Navigator headerMode="ListRegister">
+      <ListRegistorStack.Screen name="ListRegister">
+        {(props) => (
+          <View style={styles.container}>
+            <ListRegister {...props} />
+            <StatusBar style="auto" />
+          </View>
+        )}
+      </ListRegistorStack.Screen>
+    </ListRegistorStack.Navigator>
+  );
+};
+
 const Route = () => {
   return (
     <NavigationContainer>
@@ -64,13 +80,13 @@ const Route = () => {
             let iconName;
 
             if (route.name === "Home") {
-              iconName = focused
-                ? `${Platform.OS === "ios" ? "ios" : "md"}-home`
-                : `${Platform.OS === "ios" ? "ios" : "md"}-home`;
+              iconName = `${Platform.OS === "ios" ? "ios" : "md"}-home`;
             } else if (route.name === `Register`) {
               iconName = focused
                 ? `${Platform.OS === "ios" ? "ios" : "md"}-add-circle`
                 : `${Platform.OS === "ios" ? "ios" : "md"}-add-circle-outline`;
+            } else if (route.name === `ListRegister`) {
+              iconName = `${Platform.OS === "ios" ? "ios" : "md"}-list`;
             }
             return (
               <Ionicons
@@ -91,6 +107,7 @@ const Route = () => {
       >
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Register" component={RegisterStackScreen} />
+        <Tab.Screen name="ListRegister" component={ListRegisterStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -106,11 +123,11 @@ const styles = StyleSheet.create({
   },
   labelDefault: {
     color: theme.COLORS.SECONDARY,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   labelActive: {
     color: theme.COLORS.PRIMARY,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
 });
 

@@ -31,7 +31,6 @@ const FormMovie = (porps) => {
   const { onSubmit } = porps;
   const { register, handleSubmit, setValue, errors } = useForm();
 
-  console.log("errors ===> ", errors);
   useEffect(() => {
     register({ name: "title" }, { required: true });
     register({ name: "description" });

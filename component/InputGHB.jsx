@@ -52,8 +52,6 @@ export const InputGHB = (props) => {
     setDimensions({ dimensions: { width, height } });
   };
 
-  console.log('value ===> ', value)
-
   return (
     <View style={styles.multipleInput} onLayout={onLayout}>
       <Text style={styles.label}>{label}</Text>

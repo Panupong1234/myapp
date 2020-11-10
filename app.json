@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "myapp",
-    "slug": "myapp",
+    "name": "react native tutorial",
+    "slug": "react_native_tutorial",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon_a.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash_2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#673AB7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,8 +21,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/appstoreicon.png",
+        "backgroundColor": "#673AB7"
       },
       "package": "con.example.myapp"
     },

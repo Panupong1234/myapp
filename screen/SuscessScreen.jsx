@@ -8,7 +8,7 @@ const { width } = Dimensions.get("screen");
 
   return (
     <View style={styles.container}>
-        <Text>Suscess</Text>
+        <Text style={styles.text}>Suscess</Text>
     </View>
   );
 };
@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
   },
+  text: {
+    fontSize: 30,
+    color: theme.COLORS.GREY,
+    textAlign: 'center'
+  }
 });
 
 export default SuscessScreen

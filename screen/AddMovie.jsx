@@ -10,9 +10,7 @@ import FormMovie from '../component/form/MovieForm'
 const { width } = Dimensions.get("screen");
 
  const AddMovieScreen = (props) => {
-    console.log('props ====> ', JSON.stringify(props))
     const handleSubmit = (data) => {
-        console.log('handleSubmit ===> ', JSON.stringify(data))
     }
 
   return (
